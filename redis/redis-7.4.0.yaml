@@ -1,0 +1,17 @@
+services:
+  redis:
+    image: redis:7.4.0
+    container_name: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - /apps/redis/data:/data
+    networks:
+      - common-network
+    command: ["redis-server", "--appendonly", "yes"]
+
+networks:
+  common-network:
+    driver: bridge
+    external: true
