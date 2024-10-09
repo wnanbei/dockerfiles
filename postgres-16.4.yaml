@@ -2,10 +2,6 @@ services:
   postgres:
     image: postgres:16.4
     container_name: postgres
-    environment:
-      POSTGRES_USER: wnanbei
-      POSTGRES_PASSWORD: 666888
-      POSTGRES_DB: test
     restart: always
     ports:
       - "5432:5432"
@@ -13,8 +9,18 @@ services:
       - /apps/postgres/data:/var/lib/postgresql/data
     networks:
       - common-network
+    environment:
+      POSTGRES_USER: wnanbei
+      POSTGRES_PASSWORD: 666888
+      POSTGRES_DB: test
 
 networks:
   common-network:
     driver: bridge
     external: true
+
+secrets:
+  username:
+    file: ./secrets/username
+  password:
+    file: ./secrets/password

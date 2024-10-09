@@ -1,0 +1,32 @@
+services:
+  nextcloud:
+    image: nextcloud:29.0.6
+    container_name: nextcloud
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - /apps/nextcloud/data:/var/www/html
+    networks:
+      - common-network
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=nextcloud
+      - POSTGRES_USER_FILE=/run/secrets/username
+      - POSTGRES_PASSWORD_FILE=/run/secrets/password
+      - NEXTCLOUD_ADMIN_USER_FILE=/run/secrets/username
+      - NEXTCLOUD_ADMIN_PASSWORD_FILE=/run/secrets/password
+    secrets:
+      - username
+      - password
+
+networks:
+  common-network:
+    driver: bridge
+    external: true
+
+secrets:
+  username:
+    file: ./secrets/username
+  password:
+    file: ./secrets/password

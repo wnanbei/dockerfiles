@@ -2,10 +2,6 @@ services:
   mysql:
     image: mysql:8.4.2
     container_name: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 666888
-      MYSQL_USER: wnanbei
-      MYSQL_PASSWORD: 666888
     restart: always
     ports:
       - "3306:3306"
@@ -13,8 +9,18 @@ services:
       - /apps/mysql/data:/var/lib/mysql
     networks:
       - common-network
+    environment:
+      MYSQL_ROOT_PASSWORD: 666888
+      MYSQL_USER: wnanbei
+      MYSQL_PASSWORD: 666888
 
 networks:
   common-network:
     driver: bridge
     external: true
+
+secrets:
+  username:
+    file: ./secrets/username
+  password:
+    file: ./secrets/password
