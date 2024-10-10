@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:17.0
+    container_name: postgres
+    restart: unless-stopped
+    ports:
+      - "16820:5432"
+    volumes:
+      - /mnt/apps/app_data/postgres/data:/var/lib/postgresql/data
+    networks:
+      - apps-network
+    environment:
+      POSTGRES_USER: /run/secrets/username
+      POSTGRES_PASSWORD: /run/secrets/password
+      POSTGRES_DB: master
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true
+
+secrets:
+  username:
+    file: ../secrets/username
+  password:
+    file: ../secrets/password
