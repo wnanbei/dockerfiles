@@ -1,0 +1,21 @@
+services:
+  mysql:
+    image: mysql:8.4.2
+    container_name: mysql
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "16821:3306"
+    volumes:
+      - /mnt/apps/app_data/mysql/data:/var/lib/mysql
+    networks:
+      - apps-network
+    environment:
+      MYSQL_USER: ${WN_USERNAME}
+      MYSQL_PASSWORD: ${WN_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${WN_PASSWORD}
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true
