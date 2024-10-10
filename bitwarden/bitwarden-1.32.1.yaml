@@ -1,0 +1,22 @@
+services:
+  bitwarden:
+    image: vaultwarden/server:1.32.1
+    container_name: bitwarden
+    restart: unless-stopped
+    ports:
+      - "16810:80"
+    volumes:
+      - /mnt/apps/app_data/bitwarden/data/:/data/
+    networks:
+      - apps-network
+    environment:
+      - SERVER_ADMIN_EMAIL=${VAULTWARDEN_ADMIN_EMAIL}
+      - SIGNUPS_ALLOWED=false
+      - INVITATIONS_ALLOWED=true
+      - WEBSOCKET_ENABLED=true
+      - ADMIN_TOKEN=${VAULTWARDEN_ADMIN_TOKEN}
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true
