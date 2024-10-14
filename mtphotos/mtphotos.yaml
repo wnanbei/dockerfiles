@@ -1,0 +1,25 @@
+services:
+  mtphotos:
+    image: registry.cn-hangzhou.aliyuncs.com/mtphotos/mt-photos:1.33.0
+    container_name: mtphotos
+    restart: unless-stopped
+    ports:
+      - 16803:8063
+    volumes:
+      - /mnt/apps/app_data/mtphotos/config:/config
+      - /mnt/apps/app_data/mtphotos/upload:/upload
+      - /mnt/data/photos:/photos
+    networks:
+      - apps-network
+    environment:
+      - TZ=Asia/Shanghai
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=16820
+      - POSTGRES_USER=${WN_USERNAME}
+      - POSTGRES_PASSWORD=${WN_PASSWORD}
+      - POSTGRES_DATABASE=mtphotos
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true
