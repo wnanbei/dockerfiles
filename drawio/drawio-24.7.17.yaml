@@ -1,0 +1,15 @@
+services:
+  drawio:
+    image: jgraph/drawio:24.7.17
+    container_name: drawio
+    restart: unless-stopped
+    ports:
+      - 16814:8080
+      - 16815:8443
+    networks:
+      - apps-network
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true
