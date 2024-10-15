@@ -1,0 +1,19 @@
+services:
+  jackett:
+    image: linuxserver/jackett:0.22.800
+    container_name: jackett
+    restart: unless-stopped
+    ports:
+      - 16811:9117
+    volumes:
+      - /mnt/apps/app_data/jackett/data:/config
+      - /mnt/data/downloads:/downloads
+    networks:
+      - apps-network
+    environment:
+      - TZ=Asia/Shanghai
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true

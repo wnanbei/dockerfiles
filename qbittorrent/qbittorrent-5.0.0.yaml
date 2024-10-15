@@ -1,0 +1,23 @@
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:5.0.0
+    container_name: qbittorrent
+    restart: unless-stopped
+    ports:
+      - 16812:8080
+      - 16813:6881
+      - 16813:6881/udp
+    volumes:
+      - /mnt/apps/app_data/qbittorrent/appdata:/config
+      - /mnt/data/downloads:/downloads
+    networks:
+      - apps-network
+    environment:
+      - TZ=Asia/Shanghai
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=6881
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true
