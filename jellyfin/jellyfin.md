@@ -27,3 +27,15 @@ apt install intel-media-va-driver
 ```bash
 /usr/lib/jellyfin-ffmpeg/vainfo
 ```
+
+## 刮削
+
+可以使用 dnscheck 服务来查询正常解析的域名，然后修改 host。
+
+[DnsChecker](https://dnschecker.org/)
+
+需要检查以下域名：
+
+- `api.themoviedb.org`
+- `api.thetvdb.org`
+- `image.tmdb.org`
