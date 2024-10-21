@@ -8,6 +8,7 @@ services:
     volumes:
       - /mnt/apps/app_data/jellyfin/config:/config
       - /mnt/apps/app_data/jellyfin/cache:/cache
+      - ./fonts:/usr/share/fonts
       - type: bind
         source: /mnt/data/media
         target: /media
@@ -32,6 +33,3 @@ networks:
   apps-network:
     driver: bridge
     external: true
-
-include:
-  - /home/admin/dockerfiles/jellyfin/jellyfin-10.9.11.yaml
