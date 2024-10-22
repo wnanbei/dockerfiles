@@ -20,6 +20,16 @@ services:
       - POSTGRES_PASSWORD=${WN_PASSWORD}
       - POSTGRES_DATABASE=mtphotos
 
+  # mt-photos 的智能识别服务
+  mtphotos-ai:
+    image: mtphotos/mt-photos-ai:1.1.0
+    container_name: mtphotos-ai
+    restart: unless-stopped
+    networks:
+      - apps-network
+    evironment:
+      - API_AUTH_KEY=${WN_PASSWORD}
+
 networks:
   apps-network:
     driver: bridge
