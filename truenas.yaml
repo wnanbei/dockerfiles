@@ -1,0 +1,2 @@
+include:
+  - /home/admin/dockerfiles/jellyfin/jellyfin-10.9.11.yaml

@@ -1,0 +1,22 @@
+services:
+  v2raya:
+    image: mzz2017/v2raya:v2.2.6
+    container_name: v2raya
+    restart: unless-stopped
+    ports:
+      - "16816:2017"
+      - "16817:20170"
+      - "16818:20171"
+      - "16819:20172"
+    volumes:
+      - /mnt/apps/app_data/v2raya:/etc/v2raya
+    networks:
+      - apps-network
+    environment:
+      - V2RAYA_V2RAY_BIN=/usr/local/bin/v2ray
+      - V2RAYA_LOG_FILE=/tmp/v2raya.log
+
+networks:
+  apps-network:
+    driver: bridge
+    external: true
