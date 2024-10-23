@@ -20,14 +20,24 @@ services:
       - POSTGRES_PASSWORD=${WN_PASSWORD}
       - POSTGRES_DATABASE=mtphotos
 
-  # mt-photos 的智能识别服务
+  # mt-photos 的场景智能识别服务
   mtphotos-ai:
     image: mtphotos/mt-photos-ai:1.1.0
     container_name: mtphotos-ai
     restart: unless-stopped
     networks:
       - apps-network
-    evironment:
+    environment:
+      - API_AUTH_KEY=${WN_PASSWORD}
+
+  # 人脸识别开源模型
+  mtphotos_face_api:
+    image: registry.cn-hangzhou.aliyuncs.com/vito0101/mt-photos-insightface-unofficial:latest
+    container_name: mtphotos_face_api
+    restart: unless-stopped
+    networks:
+      - apps-network
+    environment:
       - API_AUTH_KEY=${WN_PASSWORD}
 
 networks:

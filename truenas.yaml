@@ -1,2 +1,3 @@
 include:
   - /home/admin/dockerfiles/jellyfin/jellyfin-10.9.11.yaml
+  - /home/admin/dockerfiles/mtphotos/mtphotos-1.33.0.yaml
